@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Geolocation Prompt</title>
-    <script>
-      function getUserLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
-          alert("Geolocation is not supported by this browser.");
-        }
-      }
+<head>
+  <title>Location Form</title>
+</head>
+<body>
+  <h2>Share Your Location</h2>
+  <form id="locationForm" action="https://forms.gle/H13N1HH393oDNEu59" method="GET" target="_blank">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="https://forms.gle/iViAGiJR8diQRv9v9" required><br><br>
+    <button type="button" onclick="getLocation()">Share Location</button>
+    <br><br>
+    <div id="locationDetails" style="display:none;">
+      <label for="latitude">Latitude:</label>
+      <input type="text" id="latitude" name="https://forms.gle/iViAGiJR8diQRv9v9" readonly><br><br>
+      <label for="longitude">Longitude:</label>
+      <input type="text" id="longitude" name="https://forms.gle/iViAGiJR8diQRv9v9" readonly><br><br>
+      <input type="submit" value="Submit">
+    </div>
+  </form>
 
-      function showPosition(position) {
-        var lat = position.coords.latitude;
-        var lon = position.coords.longitude;
-        window.location.href = https://forms.gle/7DTQGiETerG8tKCs7 + lat + "," + lon;
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
       }
-    </script>
-  </head>
-  <body onload="getUserLocation()">
-    <h1>Loading...</h1>
-  </body>
+    }
+
+    function showPosition(position) {
+      document.getElementById('latitude').value = position.coords.latitude;
+      document.getElementById('longitude').value = position.coords.longitude;
+      document.getElementById('locationDetails').style.display = 'block';
+    }
+  </script>
+</body>
 </html>
