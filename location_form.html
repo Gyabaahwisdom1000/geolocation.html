@@ -1,45 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Share Your Location</title>
-</head>
-<body>
-  <h2>Please share your location</h2>
-  <button onclick="getLocation()">Share Location</button>
-  <p id="location"></p>
-
-  <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-      } else {
-        document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
+  <head>
+    <title>Geolocation Prompt</title>
+    <script>
+      function getUserLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          alert("Geolocation is not supported by this browser.");
+        }
       }
-    }
 
-    function showPosition(position) {
-      var latitude = position.coords.latitude;
-      var longitude = position.coords.longitude;
-      document.getElementById("location").innerHTML = "Latitude: " + latitude + 
-      "<br>Longitude: " + longitude;
-    }
-
-    function showError(error) {
-      switch(error.code) {
-        case error.PERMISSION_DENIED:
-          document.getElementById("location").innerHTML = "User denied the request for Geolocation."
-          break;
-        case error.POSITION_UNAVAILABLE:
-          document.getElementById("location").innerHTML = "Location information is unavailable."
-          break;
-        case error.TIMEOUT:
-          document.getElementById("location").innerHTML = "The request to get user location timed out."
-          break;
-        case error.UNKNOWN_ERROR:
-          document.getElementById("location").innerHTML = "An unknown error occurred."
-          break;
+      function showPosition(position) {
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        document.getElementById("location").value = lat + ", " + lon;
       }
-    }
-  </script>
-</body>
+    </script>
+  </head>
+  <body onload="getUserLocation()">
+    <h1>Location Coordinates</h1>
+    <input type="text" id="location" readonly>
+    <p>Copy the coordinates above and paste them into the form.</p>
+  </body>
 </html>
